@@ -63,7 +63,14 @@ const App = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const result = await response.json();
+      const text = await response.text();
+      let result = {};
+      try {
+        result = text ? JSON.parse(text) : {};
+      } catch {
+        result = { message: text };
+      }
+
 
       if (response.ok && result.access_token) {
         alert.success("Login bem-sucedido! Redirecionando...");
