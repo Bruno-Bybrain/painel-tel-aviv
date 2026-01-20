@@ -1,0 +1,25 @@
+# Ambiente virtual
+.venv
+venv/
+*/venv/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos do Git
+.git
+.gitignore
+.gitattributes
+
+# Arquivos de configuração de editores
+.vscode/
+.idea/
+
+# Arquivos do sistema
+.DS_Store
+
+# Outros
+*.log

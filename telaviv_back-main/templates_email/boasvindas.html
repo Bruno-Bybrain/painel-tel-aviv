@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bem‑vindo ao {{ nome }}!</title>
+    <!--
+        IMPORTANTE: Muitos clientes ignoram <style> externo.
+        Por isso usamos estilos *inline* nos elementos.
+        As regras abaixo servem apenas como fallback para
+        visualizadores que suportam CSS interno.
+    -->
+    <style>
+      /* Reset básico */
+      body,
+      table,
+      td,
+      a {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      table {
+        border-collapse: collapse !important;
+      }
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+      }
+
+      /* Layout geral */
+      .wrapper {
+        width: 100%;
+        table-layout: fixed;
+        background: #f4f7fa;
+        padding: 30px 0;
+      }
+      .main {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .header {
+        background: #005d7c;
+        color: #ffffff;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .header h1 {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 28px;
+      }
+      .content {
+        padding: 30px 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #333333;
+        line-height: 1.6;
+      }
+      .content h2 {
+        font-size: 22px;
+        margin-top: 0;
+      }
+      .button {
+        display: inline-block;
+        background: #005d7c;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+      .footer {
+        background: #f1f3f5;
+        text-align: center;
+        font-size: 12px;
+        color: #777777;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .footer a {
+        color: #0d6efd;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0; padding: 0; background: #f4f7fa">
+    <!-- Wrapper (background) -->
+    <table
+      class="wrapper"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      role="presentation"
+    >
+      <tr>
+        <td align="center">
+          <!-- Card principal -->
+          <table
+            class="main"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            role="presentation"
+          >
+            <!-- Header -->
+            <tr>
+              <td class="header">
+                <h1>Bem‑vindo(a)!</h1>
+              </td>
+            </tr>
+
+            <!-- Corpo do e‑mail -->
+            <tr>
+              <td class="content">
+                <h2>Olá {{ nome }},</h2>
+                <p>
+                  É um prazer ter você conosco. Seu cadastro foi concluído com
+                  sucesso e você já pode começar a explorar todas as
+                  funcionalidades da nossa plataforma.
+                </p>
+
+                <p><strong>Seus dados de acesso:</strong></p>
+                <ul style="padding-left: 20px">
+                  <li><strong>E‑mail:</strong> {{ email }}</li>
+                  <li><strong>Senha temporária:</strong> {{ senha }}</li>
+                </ul>
+
+                <p>
+                  Por questões de segurança, recomendamos que você altere a
+                  senha assim que fizer login pela primeira vez.
+                </p>
+
+                <p style="text-align: center; margin: 30px 0">
+                  <a
+                    href="https://paineltelaviv.bybrain.com.br"
+                    target="_blank"
+                    class="button"
+                    style="color: #ffffff !important"
+                    >Acessar a Plataforma</a
+                  >
+                </p>
+
+                <p>
+                  Se precisar de ajuda, nossa equipe de suporte está à
+                  disposição.
+                </p>
+
+                <p>
+                  Abraços,<br />
+                  <strong>Equipe {{ nome }}</strong>
+                </p>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td class="footer">
+                <p>
+                  © {{ ano_atual }} {{ nome }}. Todos os direitos reservados.
+                </p>
+                <p>
+                  <a href="{{ url_privacidade }}">Política de Privacidade</a> |
+                  <a href="{{ url_termos }}">Termos de Uso</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+          <!-- fim do card principal -->
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
