@@ -1,10 +1,10 @@
 import { useState } from "react";
-// MUDANÇA 1: Importar 'Link' para navegação SPA e o hook 'useAuth'
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./Components/contexts/AuthContext.jsx";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
+// 🔴 reCAPTCHA DESATIVADO PARA TESTES
+// import ReCAPTCHA from "react-google-recaptcha";
 
 // Importações de assets e CSS
 import logo from "./assets/logo2.png";
@@ -16,23 +16,15 @@ import "./App.css";
 import AlertMessage, { alert } from "./Components/Alert/Alert.jsx";
 import UrlAtual from "./Components/Url/urlAtual.jsx";
 
-// MUDANÇA 2: O nome do componente deve ser 'App' para corresponder ao seu main.jsx
 const App = () => {
   const navigate = useNavigate();
-
-  // MUDANÇA 3: Obter a função 'login' do nosso contexto de autenticação
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
-
-  const handleCaptchaChange = (token) => {
-    setRecaptchaValue(token);
-  };
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,17 +44,14 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
+
     if (emailError) {
       alert.warning("Por favor, corrija o e-mail antes de continuar.");
       return;
     }
+
     if (!email || !password) {
       alert.warning("Por favor, preencha e-mail e senha.");
-      return;
-    }
-    // Lógica do reCAPTCHA está comentada, mantendo como no seu original
-    if (!recaptchaValue) {
-      alert.warning("Por favor, complete o reCAPTCHA.");
       return;
     }
 
@@ -71,28 +60,22 @@ const App = () => {
       const response = await fetch(`${UrlAtual()}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, recaptcha: recaptchaValue }),
+        body: JSON.stringify({ email, password }),
       });
 
       const result = await response.json();
 
-      if (response.ok && result.success) {
+      if (response.ok && result.access_token) {
         alert.success("Login bem-sucedido! Redirecionando...");
 
-        // MUDANÇA 4: A LÓGICA CORRETA DE LOGIN
-        // Em vez de salvar no localStorage manualmente, chamamos a função do contexto.
-        // Isso atualiza o estado global e salva no localStorage de forma centralizada.
         login(result.access_token);
-
-        // Após o estado ser atualizado, navegamos para a área logada.
-        // O ProtectedRoute agora verá que estamos autenticados.
         navigate("/logado");
       } else {
-        alert.warning(result.message || `Erro: ${response.status}`);
+        alert.warning(result.message || "Credenciais inválidas.");
       }
     } catch (error) {
       console.error("Erro na requisição de login:", error);
-      alert.error("Não foi possível conectar ao servidor. Tente novamente.");
+      alert.error("Não foi possível conectar ao servidor.");
     } finally {
       setLoading(false);
     }
@@ -145,24 +128,18 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="mb-3 d-flex justify-content-center">
-                <ReCAPTCHA
-                  sitekey="6LeixmcrAAAAAKL8DGBeMC8NpWhTFZHqkaxj7wkG"
-                  onChange={handleCaptchaChange}
-                />
-              </div>
+              {/* 🔴 reCAPTCHA REMOVIDO TEMPORARIAMENTE */}
 
               <button
                 type="submit"
                 className="btn btn-primary w-100 fw-bold py-2"
-                disabled={loading || !recaptchaValue}
+                disabled={loading}
               >
                 {loading ? "Acessando..." : "Acessar"}
               </button>
             </form>
 
             <div className="text-center mt-3">
-              {/* MUDANÇA 5: Usar o componente Link para uma navegação mais fluida */}
               <Link to="/esquecisenha" className="text-decoration-none small">
                 Esqueceu sua senha?
               </Link>
@@ -179,5 +156,4 @@ const App = () => {
   );
 };
 
-// MUDANÇA 6: Exportando o componente com o nome correto 'App'
 export default App;
