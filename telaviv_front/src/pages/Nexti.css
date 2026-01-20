@@ -1,0 +1,87 @@
+/* Nexti.css */
+
+.results-card-body {
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.results-card-body .table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.results-card-body .table th,
+.results-card-body .table td {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.zoomTableT {
+  zoom: 0.8;
+}
+
+/* --- ESTILOS ATUALIZADOS PARA O MODAL DE CARREGAMENTO --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Fundo um pouco mais escuro */
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 600px; /* Modal um pouco mais largo */
+  width: 90%;
+}
+
+/* --- NOVA CLASSE PARA A ÁREA DE LOG --- */
+.loading-log-viewer {
+  width: 100%;
+  height: 250px;
+  background-color: #1e1e1e; /* Cor de fundo escura, estilo terminal */
+  color: #00ff41; /* Cor do texto verde, estilo hacker */
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 10px;
+  resize: none; /* Impede que o usuário redimensione */
+  outline: none; /* Remove a borda de foco */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra interna */
+}
+/* Estiliza a barra de rolagem para um visual mais dark */
+.loading-log-viewer::-webkit-scrollbar {
+  width: 8px;
+}
+.loading-log-viewer::-webkit-scrollbar-track {
+  background: #333;
+}
+.loading-log-viewer::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 4px;
+}
+
+.modal-content .progress {
+  height: 12px; /* Barra um pouco mais grossa */
+  background-color: #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.modal-content .progress-bar {
+  background-color: #0d6efd;
+  transition: width 0.5s ease-in-out; /* Transição suave */
+}

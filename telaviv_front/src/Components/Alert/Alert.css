@@ -1,0 +1,21 @@
+/*.toast-success {
+  background: #009eb3 !important;
+  color: #fff !important;
+  z-index: 200000 !important;
+}
+
+.toast-success .Toastify__toast-icon {
+  color: #fff !important;
+  z-index: 200000 !important;
+}
+
+.toast-success .Toastify__progress-bar {
+  background-color: #fff;
+  z-index: 200000 !important;
+}
+
+.toastGeral {
+  z-index: 200000 !important;
+  position: fixed !important;
+}
+*/
